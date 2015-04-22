@@ -55,6 +55,7 @@ func main() {
     	panic(err)
     }
 
+	var total float64
     for date := from; date.Before(to); date = date.AddDate(0, 0, 1) {
     	chargeMap := map[string]float64{}
     	marker := ""
@@ -98,8 +99,13 @@ func main() {
     		}
 		}
 
+		var dayTotal float64
 		for sir, charge := range chargeMap {
 			fmt.Printf("%v\t%v\t%v USD\n", date.Format("2006-01-02"), sir, charge)
+			dayTotal += charge
 		}
+		fmt.Printf("%v\tTotal\t\t%v USD\n", date.Format("2006-01-02"), dayTotal)
+		total += dayTotal
     }
+	fmt.Printf("Grand Total\t\t\t%v USD\n", total)
 }
